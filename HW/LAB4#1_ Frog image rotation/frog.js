@@ -1,0 +1,51 @@
+const directions = {
+   UP: 'up',
+   DOWN: 'down',
+   LEFT: 'left',
+   RIGHT: 'right'
+}
+
+window.addEventListener("load", function () {
+   const canvas = document.querySelector("canvas");
+
+   // Draw 4 frogs facing different directions
+   drawFrog(canvas, 50, 50, directions.UP);
+   drawFrog(canvas, 180, 50, directions.DOWN);   
+   drawFrog(canvas, 50, 180, directions.LEFT);
+   drawFrog(canvas, 180, 180, directions.RIGHT);
+});
+
+function drawFrog(canvas, x, y, direction = directions.UP) {   
+   const context = canvas.getContext("2d");
+   const frogImg = document.querySelector("img");
+
+   switch (direction) {
+      case directions.DOWN:
+         // TODO: Translate, rotate, and translate
+		 context.translate(x + frogImg.width/2, 92);
+		 context.rotate((Math.PI /180)*180);
+		 context.translate(-232.5,-92);
+	
+         break;
+      case directions.LEFT:
+         // TODO: Translate, rotate, and translate
+		 context.translate(102.5, y + frogImg.height/2 );
+		 context.rotate((Math.PI /180)*-90);
+		 context.translate(-102.5,-222);
+                  
+         break;
+      case directions.RIGHT:
+         // TODO: Translate, rotate, and translate
+	
+		 context.translate(232.5,222);
+		 context.rotate((Math.PI /180)*90);
+		 context.translate(-232.5,-222);
+         
+         break;
+   }
+
+   context.drawImage(frogImg, 0, 0);
+
+   // Necessary so next call to drawFrog isn't rotated or translated
+   context.resetTransform();
+}
